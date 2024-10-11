@@ -2,7 +2,7 @@ import connectToDatabase from "@/app/libs/mongodb";
 import Cart from "@/app/models/Cart";
 
 // Correctly typing the request object
-export async function GET(req: Request) {
+export async function GET() {
   await connectToDatabase();
 
   try {
