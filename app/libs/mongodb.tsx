@@ -1,7 +1,8 @@
-import mongoose from "mongoose";
+import mongoose, { Connection, Mongoose } from "mongoose";
 
 declare global {
-  var mongoose: any;
+  // Define a more specific type for the global mongoose object
+  var mongoose: { conn: Mongoose | null; promise: Promise<Mongoose> | null };
 }
 
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017";
@@ -12,13 +13,14 @@ if (!MONGODB_URI) {
   );
 }
 
+// Use let instead of var
 let cached = global.mongoose;
 
 if (!cached) {
   cached = global.mongoose = { conn: null, promise: null };
 }
 
-async function connectToDatabase() {
+async function connectToDatabase(): Promise<Mongoose> {
   if (cached.conn) {
     return cached.conn;
   }

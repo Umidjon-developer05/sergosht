@@ -10,7 +10,7 @@ export async function GET() {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
-  } catch (error) {
+  } catch {
     return new Response(JSON.stringify({ success: false }), {
       status: 400,
       headers: { "Content-Type": "application/json" },
@@ -28,7 +28,7 @@ export async function POST(req: Request) {
       status: 201,
       headers: { "Content-Type": "application/json" },
     });
-  } catch (error) {
+  } catch {
     return new Response(JSON.stringify({ success: false }), {
       status: 400,
       headers: { "Content-Type": "application/json" },
