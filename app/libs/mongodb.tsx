@@ -1,8 +1,12 @@
 import mongoose, { Mongoose } from "mongoose"; // Removed unused Connection import
 
+// Extend NodeJS.Global to include mongoose property
 declare global {
-  // Define a more specific type for the global mongoose object
-  var mongoose: { conn: Mongoose | null; promise: Promise<Mongoose> | null };
+  namespace NodeJS {
+    interface Global {
+      mongoose: { conn: Mongoose | null; promise: Promise<Mongoose> | null };
+    }
+  }
 }
 
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017";
@@ -14,7 +18,9 @@ if (!MONGODB_URI) {
 }
 
 // Use let instead of var
-let cached = global.mongoose;
+let cached = global.mongoose as
+  | { conn: Mongoose | null; promise: Promise<Mongoose> | null }
+  | undefined;
 
 if (!cached) {
   cached = global.mongoose = { conn: null, promise: null };
@@ -36,4 +42,3 @@ async function connectToDatabase(): Promise<Mongoose> {
 }
 
 export default connectToDatabase;
-
