@@ -1,4 +1,4 @@
-import mongoose, { Connection, Mongoose } from "mongoose";
+import mongoose, { Mongoose } from "mongoose"; // Removed unused Connection import
 
 declare global {
   // Define a more specific type for the global mongoose object
