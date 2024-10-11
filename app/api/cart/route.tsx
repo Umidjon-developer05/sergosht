@@ -1,7 +1,8 @@
 import connectToDatabase from "@/app/libs/mongodb";
 import Cart from "@/app/models/Cart";
 
-export async function GET(req: any) {
+// Correctly typing the request object
+export async function GET(req: Request) {
   await connectToDatabase();
 
   try {
@@ -10,7 +11,8 @@ export async function GET(req: any) {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
-  } catch (error) {
+  } catch (_error) {
+    // Ignore error since it's unused
     return new Response(JSON.stringify({ success: false }), {
       status: 400,
       headers: { "Content-Type": "application/json" },
@@ -18,7 +20,7 @@ export async function GET(req: any) {
   }
 }
 
-export async function POST(req: any) {
+export async function POST(req: Request) {
   await connectToDatabase();
 
   try {
@@ -28,7 +30,8 @@ export async function POST(req: any) {
       status: 201,
       headers: { "Content-Type": "application/json" },
     });
-  } catch (error) {
+  } catch (_error) {
+    // Ignore error since it's unused
     return new Response(JSON.stringify({ success: false }), {
       status: 400,
       headers: { "Content-Type": "application/json" },

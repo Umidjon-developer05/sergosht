@@ -1,7 +1,7 @@
 import connectToDatabase from "@/app/libs/mongodb";
 import Product from "@/app/models/Product";
 
-export async function GET(req: any) {
+export async function GET(req: Request) {
   await connectToDatabase();
 
   try {
@@ -18,7 +18,7 @@ export async function GET(req: any) {
   }
 }
 
-export async function POST(req: any) {
+export async function POST(req: Request) {
   await connectToDatabase();
 
   try {
